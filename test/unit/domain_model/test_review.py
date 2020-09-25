@@ -1,8 +1,5 @@
-from domainmodel.review import Review
-from domainmodel.movie import Movie
-from domainmodel.actor import Actor
-from domainmodel.genre import Genre
-from domainmodel.director import Director
+from AditiFlix_App.domainmodel.review import Review
+from AditiFlix_App.domainmodel.movie import Movie
 
 import pytest
 from datetime import datetime

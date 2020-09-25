@@ -1,10 +1,10 @@
-from domainmodel.movie import Movie
-from domainmodel.director import Director
-from domainmodel.genre import Genre
-from domainmodel.actor import Actor
-from domainmodel.user import User
-from domainmodel.stats import Stats
-from datafilereaders.movie_file_csv_reader import MovieFileCSVReader
+from AditiFlix_App.domainmodel.movie import Movie
+from AditiFlix_App.domainmodel.director import Director
+from AditiFlix_App.domainmodel.genre import Genre
+from AditiFlix_App.domainmodel.actor import Actor
+from AditiFlix_App.domainmodel.user import User
+from AditiFlix_App.domainmodel.stats import Stats
+from AditiFlix_App.adapters.datafilereaders.movie_file_csv_reader import MovieFileCSVReader
 
 
 
@@ -91,8 +91,9 @@ def test_top_genres(stats):
     assert stats.top_genres(-1) == [Genre("Comedy"), Genre("Action"), Genre("Romance"),
                                     Genre("Drama")]
 
+
 def test_recs(stats):
-    filename = 'test.csv'
+    filename = '../../data/test.csv'
     movie_file_reader = MovieFileCSVReader(filename)
     movie_file_reader.read_csv_file()
     assert stats.make_recommendations(movie_file_reader.dataset_of_movies, -1) == [Movie("Guardians of the Galaxy", 2014), Movie("Split", 2016), Movie("Sing", 2016), Movie("Suicide Squad", 2016)]

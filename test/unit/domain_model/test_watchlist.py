@@ -1,7 +1,7 @@
 import pytest
 
-from domainmodel.watchlist import WatchList
-from domainmodel.movie import Movie
+from AditiFlix_App.domainmodel import WatchList
+from AditiFlix_App.domainmodel import Movie
 
 def test():
     watchlist = WatchList()

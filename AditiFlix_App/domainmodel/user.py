@@ -1,5 +1,5 @@
-from domainmodel.movie import Movie
-from domainmodel.review import Review
+from AditiFlix_App.domainmodel.movie import Movie
+from AditiFlix_App.domainmodel.review import Review
 
 
 class User:

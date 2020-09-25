@@ -1,4 +1,5 @@
-from domainmodel.movie import Movie
+from AditiFlix_App.domainmodel.movie import Movie
+
 
 class WatchList:
     def __init__(self):

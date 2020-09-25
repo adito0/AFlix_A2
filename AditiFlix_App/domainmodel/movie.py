@@ -1,6 +1,6 @@
-from domainmodel.genre import Genre
-from domainmodel.actor import Actor
-from domainmodel.director import Director
+from AditiFlix_App.domainmodel.genre import Genre
+from AditiFlix_App.domainmodel.actor import Actor
+from AditiFlix_App.domainmodel.director import Director
 
 import datetime
 

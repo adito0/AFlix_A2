@@ -1,4 +1,4 @@
-from domainmodel.director import Director
+from AditiFlix_App.domainmodel.director import Director
 
 import pytest
 

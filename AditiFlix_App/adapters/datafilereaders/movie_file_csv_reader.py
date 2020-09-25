@@ -1,7 +1,7 @@
-from domainmodel.movie import Movie
-from domainmodel.actor import Actor
-from domainmodel.genre import Genre
-from domainmodel.director import Director
+from AditiFlix_App.domainmodel.movie import Movie
+from AditiFlix_App.domainmodel.actor import Actor
+from AditiFlix_App.domainmodel.genre import Genre
+from AditiFlix_App.domainmodel.director import Director
 
 import csv
 

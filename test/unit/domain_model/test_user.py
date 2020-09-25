@@ -1,12 +1,9 @@
-from domainmodel.review import Review
-from domainmodel.movie import Movie
-from domainmodel.actor import Actor
-from domainmodel.genre import Genre
-from domainmodel.director import Director
-from domainmodel.user import User
+from AditiFlix_App.domainmodel.review import Review
+from AditiFlix_App.domainmodel import Movie
+from AditiFlix_App.domainmodel import User
 
 import pytest
-from datetime import datetime
+
 
 @pytest.fixture
 def user():

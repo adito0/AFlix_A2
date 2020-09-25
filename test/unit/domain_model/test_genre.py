@@ -1,4 +1,4 @@
-from domainmodel.genre import Genre
+from AditiFlix_App.domainmodel import Genre
 
 import pytest
 

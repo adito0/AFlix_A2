@@ -1,9 +1,9 @@
-from domainmodel.user import User
+from AditiFlix_App.domainmodel.user import User
 
 
 class Stats:
 
-    def __init__(self, user : User):
+    def __init__(self, user: User):
         self.__user = user
         self.__watched_directors = dict()
         self.__watched_actors = dict()
@@ -122,4 +122,15 @@ class Stats:
             ranked_list.append(i)
         ranked_list.reverse()
         return ranked_list
+
+    # def populate_actors_directors_genres(self, list_of_movies):
+    #     for movie in list_of_movies:
+    #         if movie.director not in self.__watched_directors and movie.director is not None:
+    #             self.__watched_directors.append(movie.director)
+    #         for actor in movie.actors:
+    #             if actor not in self.__watched_actors and actor is not None:
+    #                 self.__watched_actors.append(actor)
+    #         for genre in movie.genres:
+    #             if genre not in self.__watched_genres and genre is not None:
+    #                 self.__watched_genres.append(genre)
 

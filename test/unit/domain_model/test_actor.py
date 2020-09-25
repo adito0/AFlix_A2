@@ -1,4 +1,4 @@
-from domainmodel.actor import Actor
+from AditiFlix_App.domainmodel.actor import Actor
 
 import pytest
 

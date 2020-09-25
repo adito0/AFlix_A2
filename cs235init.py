@@ -1,8 +1,8 @@
-from datafilereaders.movie_file_csv_reader import MovieFileCSVReader
-from domainmodel.user import User, Review, Movie
+from AditiFlix_App.adapters.datafilereaders import MovieFileCSVReader
+
 
 def main():
-    filename = 'datafiles/Data1000Movies.csv'
+    filename = 'AditiFlix_App/adapters/datafiles/Data1000Movies.csv'
     movie_file_reader = MovieFileCSVReader(filename)
     movie_file_reader.read_csv_file()
     print(f'number of unique movies: {len(movie_file_reader.dataset_of_movies)}')

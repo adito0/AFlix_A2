@@ -1,7 +1,7 @@
-from domainmodel.movie import Movie
-from domainmodel.director import Director
-from domainmodel.genre import Genre
-from domainmodel.actor import Actor
+from AditiFlix_App.domainmodel import Movie
+from AditiFlix_App.domainmodel.director import Director
+from AditiFlix_App.domainmodel import Genre
+from AditiFlix_App.domainmodel.actor import Actor
 
 import pytest
 

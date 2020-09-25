@@ -1,13 +1,12 @@
-from datafilereaders.movie_file_csv_reader import MovieFileCSVReader
-from domainmodel.genre import Genre
-from domainmodel.actor import Actor
-from domainmodel.director import Director
-from domainmodel.movie import Movie
+from AditiFlix_App.adapters.datafilereaders import MovieFileCSVReader
+from AditiFlix_App.domainmodel import Genre
+from AditiFlix_App.domainmodel.actor import Actor
+from AditiFlix_App.domainmodel.director import Director
+from AditiFlix_App.domainmodel import Movie
 
-import pytest
 
 def test_movies():
-    movie_file_reader = MovieFileCSVReader('test.csv')
+    movie_file_reader = MovieFileCSVReader('../../data/test.csv')
     movie_file_reader.read_csv_file()
     movie1 = Movie("Guardians of the Galaxy", 2014)
     movie1.description = "A group of intergalactic criminals are forced to work together to stop a fanatical warrior from taking control of the universe."
