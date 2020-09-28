@@ -25,6 +25,7 @@ class Movie:
         self.__runtime_minutes = None
         self.__rating = None
         self.__votes = None
+        self.__reviews = list()
 
     @property
     def title(self):
@@ -157,6 +158,15 @@ class Movie:
             else:
                 self.__votes = votes
 
+## NEED TO ADD TESTS
+    # @property
+    # def reviews(self):
+    #     return self.__reviews
+    #
+    # def add_review(self, review):
+    #     if isinstance(review, Review):
+    #         self.__reviews.append(review)
+
     def __repr__(self):
         return f"<Movie {self.title}, {self.release_year}>"
 
@@ -171,6 +181,7 @@ class Movie:
         if self.__title < other.title:
             return True
         elif self.__title == other.title:
+            print(self.__title, self.__release_year, other.release_year)
             if self.__release_year < other.release_year:
                 return True
         return False

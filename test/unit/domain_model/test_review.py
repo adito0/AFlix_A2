@@ -3,7 +3,7 @@ from AditiFlix_App.domainmodel.movie import Movie
 
 import pytest
 from datetime import datetime
-
+import time
 
 
 @pytest.fixture
@@ -29,7 +29,9 @@ def test_init(review):
     assert repr(review1) == "<Rating None, Review Review Test>"
     assert repr(review4) == "<Rating 1, Review None>"
 
+
 def test_eq(review):
+    time.sleep(1)
     review1 = Review(Movie("Up", 2009), 'Review Test', 4)
     assert review1 != review
     review2 = Review(Movie("Up", 2009), 'Review Test', 0)

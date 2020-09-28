@@ -36,12 +36,18 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def add_movie(self, article: Movie):
+    def add_review(self, review: Review):
+        """" Adds a User to the repository. """
+        raise NotImplementedError
+
+
+    @abc.abstractmethod
+    def add_movie(self, movie: Movie):
         """ Adds an Movie to the repository. """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_movie(self, id: int) -> Movie:
+    def get_movie(self, title: str, year: int) -> Movie:
         """ Returns Movie with id from the repository.
 
         If there is no Movie with the given id, this method returns None.
@@ -49,12 +55,12 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_movie_by_title(self, target_date: date) -> List[Movie]:
-        """ Returns a list of Movies that were published on target_date.
+    def get_movies_by_title(self, title: str) -> Movie:
+        """ Returns Movie with given title.
 
-        If there are no Movies on the given date, this method returns an empty list.
+        If there are no Movies with that title, this method returns an empty list.
         """
-        raise NotImplementedError
+        raise NotImplementedError    \
 
     @abc.abstractmethod
     def get_number_of_movies(self):
@@ -62,26 +68,33 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_movie_ids_for_actor(self, actor_name: str):
-        """ Returns a list of Movies, whose ids match those in id_list, from the repository.
+    def get_movies_for_genre(self, genre_name: str):
+        """ Returns a list of ids representing Movies that are tagged by genre_name.
 
-        If there are no matches, this method returns an empty list.
+        If there are no Movies that are tagged by genre_name, this method returns an empty list.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_movie_ids_for_genre(self, genre_name: str):
-        """ Returns a list of ids representing Movies that are tagged by genre_name.
+    def get_movies_for_director(self, director_name: str):
+        """ Returns a list of ids representing Movies that are tagged by director name.
 
-        If there are Movies that are tagged by genre_name, this method returns an empty list.
+        If there are no Movies that are tagged by director name, this method returns an empty list.
         """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_movie_ids_for_director(self, director_name: str):
-        """ Returns a list of ids representing Movies that are tagged by genre_name.
+    def get_movies_for_actor(self, actor_name: str):
+        """ Returns a list of ids representing Movies that are tagged by actor name.
 
-        If there are Movies that are tagged by genre_name, this method returns an empty list.
+        If there are no Movies that are tagged by actor name, this method returns an empty list.
+        """
+        raise NotImplementedError
+
+    def get_reviews_for_movie(movie:Movie):
+        """ Returns a list of ids representing Movies that are tagged by actor name.
+
+                If there are no Movies that are tagged by actor name, this method returns an empty list.
         """
         raise NotImplementedError
 
@@ -96,22 +109,22 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def add_actor(self, genre: Genre):
+    def add_actor(self, actor: Actor):
         """ Adds a Actor to the repository. """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_actor(self) -> List[Genre]:
+    def get_actors(self) -> List[Actor]:
         """ Returns the Actors stored in the repository. """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def add_director(self, genre: Genre):
+    def add_director(self, director: Director):
         """ Adds a Genre to the repository. """
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_director(self) -> List[Genre]:
+    def get_directors(self) -> List[Director]:
         """ Returns the Genres stored in the repository. """
         raise NotImplementedError
 

@@ -1,10 +1,10 @@
 import pytest
 
-from AditiFlix_App.domainmodel import WatchList
-from AditiFlix_App.domainmodel import Movie
+from AditiFlix_App.domainmodel.movielist import MovieList
+from AditiFlix_App.domainmodel.movie import Movie
 
 def test():
-    watchlist = WatchList()
+    watchlist = MovieList()
     assert watchlist.size() == 0
     watchlist.add_movie(Movie("Up", 2009))
     assert watchlist.size() == 1
@@ -25,14 +25,13 @@ def test():
     with pytest.raises(StopIteration):
         next(i)
 
-    watchlist.remove_movie(Movie("Up", 2009))
+    assert watchlist.remove_movie(Movie("Up", 2009)) == Movie("Up", 2009)
     assert watchlist.size() == 3
-    watchlist.remove_movie(Movie("Left", 2009))
-    assert watchlist.size() == 3
-    assert repr(watchlist.select_movie_to_watch(0)) == "<Movie Down, 1999>"
-    assert watchlist.select_movie_to_watch(4) == None
-    assert repr(watchlist.first_movie_in_watchlist()) == "<Movie Down, 1999>"
+    assert watchlist.remove_movie(Movie("XYZ", 2013)) == Movie("XYZ", 2013)
+    assert watchlist.remove_movie(Movie("Non-existent", 2009)) == None
+    assert watchlist.size() == 2
+    assert repr(watchlist.first_movie_in_list()) == "<Movie Down, 1999>"
     watchlist.remove_movie(Movie("Down", 1999))
     watchlist.remove_movie(Movie("XYZ", 2013))
     watchlist.remove_movie(Movie("Anabelle", 2020))
-    assert watchlist.first_movie_in_watchlist() == None
+    assert watchlist.first_movie_in_list() == None

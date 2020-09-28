@@ -6,7 +6,7 @@ from AditiFlix_App.domainmodel.movie import Movie
 class Review:
 
     def __init__(self, movie, review_text, rating):
-        if type(rating) is not int or rating < 1 or rating > 10:
+        if (type(rating) is not int and type(rating) is not float) or (rating < 1) or (rating > 10):
             self.__rating = None
         else:
             self.__rating = rating
@@ -38,6 +38,12 @@ class Review:
     @property
     def timestamp(self):
         return self.__timestamp
+
+    @timestamp.setter
+    def timestamp(self, timestamp):
+        if isinstance(timestamp, datetime):
+            self.__timestamp = timestamp
+
 
     def __repr__(self):
         return f"<Rating {self.__rating}, Review {self.__review_text}>"
