@@ -16,14 +16,5 @@ def get_random_movies(number):
     print(list_of_movies)
     return list_of_movies
 
-def get_image(movie: Movie=Movie("Split",2016)):
-    token = "adea3d0d"
-    movie_name = movie.title
-    movie_year = movie.release_year
-    url = "http://www.omdbapi.com/?apikey="+token+"&t="+movie_name.lower()+"&y="+str(movie_year)
-    print(url)
-    r = requests.get(url).json()
-    return r['Poster']
-
 def get_movie(name:str, year:int):
     return repo.repo_instance.get_movie(name, year)

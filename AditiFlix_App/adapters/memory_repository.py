@@ -2,6 +2,9 @@ import csv
 import os
 from datetime import date, datetime
 from typing import List
+import json
+
+from pip._vendor import requests
 
 from bisect import bisect, bisect_left, insort_left
 
@@ -136,7 +139,7 @@ def read_csv_file(filename: str):
 
 
 def load_movies(data_path: str, repo: MemoryRepository):
-    for row in read_csv_file(os.path.join(data_path, 'test.csv')):
+    for row in read_csv_file(os.path.join(data_path, 'Data150Movies.csv')):
 
         try:
             movie = Movie(row['Title'], int(row['Year']))
@@ -180,6 +183,8 @@ def load_movies(data_path: str, repo: MemoryRepository):
             except ValueError:
                 movie.rating = None
             if movie not in repo.get_movies():
+                movie.image = get_image(movie)
+                print("Image", movie.image)
                 repo.add_movie(movie)
 
 
@@ -277,6 +282,15 @@ def populate(data_path: str, repo: MemoryRepository):
 
     # Load users into the repository.
     load_users(data_path, repo)
+
+def get_image(movie: Movie=Movie("Split",2016)):
+    token = "adea3d0d"
+    movie_name = movie.title.replace(" ","+")
+    movie_year = movie.release_year
+    url = "http://www.omdbapi.com/?apikey="+token+"&t="+movie_name.lower()+"&y="+str(movie_year)
+    print(url)
+    r = requests.get(url).json()
+    return r['Poster']
 
 def test_populate():
     # Can only use with test.csv and Data5Users.csv

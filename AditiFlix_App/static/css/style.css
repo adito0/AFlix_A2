@@ -52,13 +52,38 @@ body
 .movie-img
 {
     position: relative;
-    top: 50px;
+    top: 125px;
     left: 175px;
-    height: 600px;
+    height: 500px;
     padding: 20px;
+    transition: 3s ease-out;
 }
 
 .movie-rec
 {
+    height: 200px;
+    padding: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: .2s ease-out;
+}
 
+.movie-rec:hover
+{
+    transform: translateY(-10px);
+}
+
+.recs
+{
+    position: relative;
+    top: 50px;
+}
+
+.recs-movie-title
+{
+    text-align: center;
+    max-width: 150px;
+    word-wrap: normal;
+    padding: 15px;
 }

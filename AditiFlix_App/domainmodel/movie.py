@@ -26,6 +26,7 @@ class Movie:
         self.__rating = None
         self.__votes = None
         self.__reviews = list()
+        self.__image = ""
 
     @property
     def title(self):
@@ -48,6 +49,16 @@ class Movie:
             self.__release_year = None
         else:
             self.__release_year = movie_release_year
+
+# ADD TESTS
+    @property
+    def image(self):
+        return self.__image
+
+    @image.setter
+    def image(self, image_url: str):
+        if isinstance(image_url, str):
+            self.__image = image_url
 
     @property
     def description(self):
