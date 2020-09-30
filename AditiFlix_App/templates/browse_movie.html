@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block content %}
+<main id="main">
+    <div class="container movie details">
+        <div class="row">
+            <div class="col-md-6 left-box">
+                <h1>{{movie.title}} ({{movie.release_year}})</h1>
+                <p style="color:#5a7791;"><b>Runtime:</b> {{movie.runtime_minutes}} minutes &nbsp;&nbsp;&nbsp;&nbsp;<b>Director:</b> {{movie.director.director_full_name}}</p>
+                <p>{{movie.description}}</p>
+                <div class="row">
+                    <div class="col">
+                        <p>Cast:</p>
+                        {% for actor in movie.actors %}
+                            <li>{{actor.actor_full_name}}</li>
+                        {% endfor %}
+                    </div>
+                    <div class="col">
+                        <p>Genres:</p>
+                        {% for genre in movie.genres %}
+                            <li>{{genre.genre_name}}</li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                    <img src={{image}} class="movie-img">
+            </div>
+        </div>
+        <div class="row">
+            {% for movie in recs %}
+            <div class="col-6">
+                <img src={{movie}} class="movie-rec">
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
