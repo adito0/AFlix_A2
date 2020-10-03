@@ -34,7 +34,7 @@ def signup():
             services.add_user(form.username.data, form.password.data, repo.repo_instance)
             print(form.username.data, form.password.data)
             # All is well, redirect the user to the login page.
-            return redirect(url_for('authentication_bp.s'))
+            return redirect(url_for('authentication_bp.signin'))
         except services.NameNotUniqueException:
             print("not unique")
             username_not_unique = True
@@ -44,6 +44,7 @@ def signup():
         form=form,
         register=True,
         redirect=url_for('authentication_bp.signup'),
+        # redirect="/auth/ri",
         notUnique=username_not_unique
     )
 
@@ -52,9 +53,12 @@ def signin():
     form = SignupForm()
     if form.validate_on_submit():
 
-        return redirect(url_for("home_bp.home3"))
+        return redirect(url_for("authentication_bp.ri"))
     return render_template('signup.html', form=form, register=False)
 
+@authentication_blueprint.route('/ri', methods=['GET', 'POST'])
+def ri():
+    return "HI"
 
 # @authentication_blueprint.route('/register', methods=['GET', 'POST'])
 # def register():

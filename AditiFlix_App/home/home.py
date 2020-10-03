@@ -2,6 +2,10 @@ from flask import Blueprint, render_template, request
 
 import AditiFlix_App.helpers.helper_functions as helper
 
+from flask_wtf import FlaskForm
+from wtforms import TextAreaField, HiddenField, SubmitField, FloatField
+from wtforms.validators import DataRequired, Length, ValidationError
+
 
 home_blueprint = Blueprint(
     'home_bp', __name__)
@@ -87,3 +91,14 @@ def home5():
         movieName=movie.title,
         reviews=review_list
     )
+
+@home_blueprint.route('/write', methods=['GET'])
+def home6():
+    return
+
+class CommentForm(FlaskForm):
+    review = TextAreaField('Review', [
+        DataRequired()])
+    rating = FloatField('Rating', [
+        DataRequired()])
+    submit = SubmitField('Submit')

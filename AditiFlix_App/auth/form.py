@@ -21,8 +21,8 @@ class SignupForm(FlaskForm):
     password = PasswordField('Password', [
         DataRequired(message="Please enter a password."),
     ])
-    confirmPassword = PasswordField('Repeat Password', [
-            EqualTo(password, message='Passwords must match.')
-            ])
-    recaptcha = RecaptchaField()
+    # confirmPassword = PasswordField('Repeat Password', [
+    #         EqualTo(password, message='Passwords must match.')
+    #         ])
+    #recaptcha = RecaptchaField()
     submit = SubmitField('Submit')

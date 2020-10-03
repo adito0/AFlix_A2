@@ -34,24 +34,7 @@
       {% endif %}
     </div>
     {% if register %}
-<!--      <div class="form-field"><p><b>CONFIRM PASSWORD</b></p> {{ form.confirmPassword }}-->
-<!--        {% if form.confirmPassword.errors %}-->
-<!--          <ul class="errors">-->
-<!--            {% for error in form.confirmPassword.errors %}-->
-<!--              <li>{{ error }}</li>-->
-<!--            {% endfor %}-->
-<!--          </ul>-->
-<!--        {% endif %}-->
-<!--      </div>-->
-      <div class="form-field">{{ form.recaptcha.label }} {{ form.recaptcha }}
-        {% if form.recaptcha.errors %}
-          <ul class="errors">
-            {% for error in form.recaptcha.errors %}
-              <li>{{ error }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      </div>
+
     {% endif %}
     <div style="display:flex;justify-content:center;padding:20px">
       {{ form.submit }}
