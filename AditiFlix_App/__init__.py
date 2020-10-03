@@ -32,5 +32,8 @@ def create_app(test_config=None):
         # Register blueprints.
         from .home import home
         app.register_blueprint(home.home_blueprint)
+        from .auth import auth
+        app.register_blueprint(auth.authentication_blueprint)
+
 
     return app

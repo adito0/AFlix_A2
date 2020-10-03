@@ -15,3 +15,7 @@ class Config:
 
     SECRET_KEY = environ.get('SECRET_KEY')
 
+    RECAPTCHA_PUBLIC_KEY = environ.get('RECAPTCHA_SITE_KEY')
+    RECAPTCHA_PRIVATE_KEY = environ.get('RECAPTCHA_PRIVATE_KEY')
+
+

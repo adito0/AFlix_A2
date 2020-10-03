@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div class="rev-flex">
+    <div class="rev-section">
+
+        <h2 class="title">Reviews for {{movieName}}</h2>
+        <div class="reviews">
+            {% for review in reviews %}
+                <div class="review">
+                    <div class="body-review">
+                        <div class="name-review">{{review.movie.title}}</div>
+                        <div class="place-review">{{review.timestamp}}</div>
+                        <div class="rating">
+                            {{review.rating}}
+                        </div>
+                        <div class="desc-review">
+                            {{review.review_text}}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

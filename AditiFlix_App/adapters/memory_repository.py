@@ -54,6 +54,7 @@ class MemoryRepository(AbstractRepository):
         for review in self.__dataset_of_reviews:
             if review.movie == movie:
                 review_list.append(review)
+        print("RL", review_list)
         return review_list
 
     def get_reviews(self):
@@ -77,6 +78,13 @@ class MemoryRepository(AbstractRepository):
         list_of_movies = []
         for movie in self.__dataset_of_movies:
             if title == movie.title:
+                list_of_movies.append(movie)
+        return list_of_movies
+
+    def get_movies_for_year(self, year: int) -> List[Movie]:
+        list_of_movies = []
+        for movie in self.__dataset_of_movies:
+            if year == movie.release_year:
                 list_of_movies.append(movie)
         return list_of_movies
 
@@ -106,6 +114,7 @@ class MemoryRepository(AbstractRepository):
                 if Actor(actor_name) in movie.actors:
                     list_of_movies.append(movie)
         return list_of_movies
+
 
     def add_genre(self, genre: Genre):
         if genre not in self.__dataset_of_genres:
@@ -139,7 +148,7 @@ def read_csv_file(filename: str):
 
 
 def load_movies(data_path: str, repo: MemoryRepository):
-    for row in read_csv_file(os.path.join(data_path, 'Data150Movies.csv')):
+    for row in read_csv_file(os.path.join(data_path, 'test.csv')):
 
         try:
             movie = Movie(row['Title'], int(row['Year']))
@@ -184,12 +193,16 @@ def load_movies(data_path: str, repo: MemoryRepository):
                 movie.rating = None
             if movie not in repo.get_movies():
                 movie.image = get_image(movie)
-                print("Image", movie.image)
+                print(movie.image)
+                if movie.image == "":
+                    movie.image = "../static/none.jpg"
+                print("Image", movie.image, "fin")
                 repo.add_movie(movie)
 
 
 def load_users(data_path: str, repo: MemoryRepository):
 #    for row in read_csv_file(os.path.join(data_path, 'test1user.csv')):
+    print("OS",os.path.join(data_path, 'Data5Users.csv'))
     for row in read_csv_file(os.path.join(data_path, 'Data5Users.csv')):
         watching_time = 0
         watchlist_string = row['Watchlist'].strip().split("|")
@@ -235,6 +248,7 @@ def load_users(data_path: str, repo: MemoryRepository):
         review_list = []
         for review_string in reviews_string:
             review_string = review_string.strip().split(";")
+            print("REV:", review_string)
             if len(review_string) > 4:
                 try:
                     movie = Movie(review_string[0].strip(), int(review_string[1].strip()))
@@ -274,6 +288,7 @@ def load_users(data_path: str, repo: MemoryRepository):
             watchlist=watchlist
         )
         repo.add_user(user)
+        print(repo.get_reviews())
 
 
 def populate(data_path: str, repo: MemoryRepository):
@@ -290,7 +305,9 @@ def get_image(movie: Movie=Movie("Split",2016)):
     url = "http://www.omdbapi.com/?apikey="+token+"&t="+movie_name.lower()+"&y="+str(movie_year)
     print(url)
     r = requests.get(url).json()
-    return r['Poster']
+    print(r)
+    if r['Response'] == "True":
+        return r['Poster']
 
 def test_populate():
     # Can only use with test.csv and Data5Users.csv
@@ -299,8 +316,8 @@ def test_populate():
     repo = MemoryRepository()
     populate(TEST_DATA_PATH, repo)
     repo.get_movies()
-    print(repo.get_reviews())
-    print(repo.get_movies())
+    print("R", repo.get_reviews())
+    print("RM", repo.get_reviews_for_movie(Movie('Split', 2016)))
     assert repr(repo.get_actors()) == "[<Actor Anya Taylor-Joy>, <Actor Bradley Cooper>, <Actor Charlize Theron>, <Actor Chris Pratt>, <Actor Haley Lu Richardson>, <Actor Jared Leto>, <Actor Jessica Sula>, <Actor Logan Marshall-Green>, <Actor Margot Robbie>, <Actor Matthew McConaughey>, <Actor Michael Fassbender>, <Actor Noomi Rapace>, <Actor Reese Witherspoon>, <Actor Scarlett Johansson>, <Actor Seth MacFarlane>, <Actor Vin Diesel>, <Actor Viola Davis>, <Actor Will Smith>, <Actor Zoe Saldana>]"
     assert repr(repo.get_directors()) == "[<Director David Ayer>, <Director James Gunn>, <Director M. Night Shyamalan>, <Director Ridley Scott>, <Director Taika Waititi>]"
     assert repr(repo.get_genres()) == "[<Genre Action>, <Genre Adventure>, <Genre Animation>, <Genre Family>, <Genre Fantasy>, <Genre Horror>, <Genre Mystery>, <Genre Sci-Fi>, <Genre Thriller>]"

@@ -87,3 +87,202 @@ body
     word-wrap: normal;
     padding: 15px;
 }
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+    padding: 5px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #92aab0;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #155766;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #155766;
+  cursor: pointer;
+}
+
+.flex-grid
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-item-movie
+{
+    width: 250px;
+    color: #fff;
+}
+
+.nxt-btn
+{
+  background-color: #008CBA !important;
+  border: none !important;
+  color: white !important;
+  padding: 15px 32px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  font-size: 16px !important;
+  margin: 4px 2px !important;
+  cursor: pointer !important;
+}
+
+.formwrapper
+{
+    margin-top: 50px;
+    margin-left: 625px;
+    margin-right: 575px;
+    height: 330px;
+    color: #317d72;
+    display: flex;
+    justify-content: center;
+    background-color:#fff
+}
+
+.form-field
+{
+    padding: 20px;
+    text-align: center;
+}
+
+input[type='submit'] {
+  background-color: #317d72;
+  border: none !important;
+  color: white !important;
+  padding: 15px 32px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  font-size: 16px !important;
+  margin: 4px 2px !important;
+  cursor: pointer !important;
+}
+
+input[type='submit']:hover {
+    background-color: #008CBA;
+    color: white;
+}
+
+.flex-col
+{
+    margin-top: 100;
+    padding: 50px;
+}
+
+.flex-col1
+{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    justify-content: flex-start;
+    margin-top: 100;
+    padding: 50px;
+}
+
+.search-flex
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
+    position: relative;
+    left: 150;
+    color: white;
+}
+
+.flex-row
+{
+    padding:10px;
+    width: 100%;
+}
+
+.rev-section{
+  margin: auto;
+  padding: 0 1rem;
+  max-width: 1100px;
+  text-align: center;
+}
+
+.title{
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: rgb(50, 50, 50);
+  margin-bottom: .5rem;
+}
+.note{
+  font-size: 1.1rem;
+  color: rgb(150, 150, 150);
+  font-style: italic;
+    color: red;
+  font
+
+}
+
+.reviews{
+  margin: 2rem auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.review{
+  margin: 0 1rem;
+  min-width: 300px;
+  flex: 1;
+}
+
+.body-review{
+  background-color: rgb(238, 238, 238);
+  padding: 2.5rem;
+  box-shadow: 2px 2px 10px 3px rgb(225, 225, 225);
+}
+.name-review{
+  font-size: 1.5rem;
+  color: rgb(50, 50, 50);
+  margin-bottom: .25rem;
+}
+.place-review{
+  color: red;
+  font-style: italic;
+}
+.rating{
+  color: rgb(253, 180, 42);
+  margin: 1rem 0;
+}
+.desc-review{
+  line-height: 1.5rem;
+  letter-spacing: 1px;
+  color: rgb(150, 150, 150);
+}
+
+@media (max-width: 678px){
+  .review{
+    margin-top: 1.5rem;
+  }
+}
+
+.rev-flex
+{
+  display: flex;
+  height: 100vh;
+}

@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="title" style="color:#fff;margin-top:100px;margin-left:50px;display:flex;justify-content:center;">
+  {% if register %}
+    Register
+  {% else %}
+    Log in
+  {% endif %}
+</h2>
+<div class="formwrapper">
+  <form method="POST" action={{redirect}}>
+    {{ form.csrf_token }}
+    <div class="form-field"><p><b>USERNAME</b></p> {{ form.username }}
+      {% if form.username.errors%}
+        <ul class="errors">
+          {% for error in form.username.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% if notUnique%}
+        <ul class="errors">
+          Username is not unique. Please enter another one.
+        </ul>
+      {% endif %}
+    </div>
+    <div class="form-field"><p><b>PASSWORD</b></p> {{ form.password }}
+      {% if form.password.errors %}
+        <ul class="errors">
+          {% for error in form.password.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    {% if register %}
+<!--      <div class="form-field"><p><b>CONFIRM PASSWORD</b></p> {{ form.confirmPassword }}-->
+<!--        {% if form.confirmPassword.errors %}-->
+<!--          <ul class="errors">-->
+<!--            {% for error in form.confirmPassword.errors %}-->
+<!--              <li>{{ error }}</li>-->
+<!--            {% endfor %}-->
+<!--          </ul>-->
+<!--        {% endif %}-->
+<!--      </div>-->
+      <div class="form-field">{{ form.recaptcha.label }} {{ form.recaptcha }}
+        {% if form.recaptcha.errors %}
+          <ul class="errors">
+            {% for error in form.recaptcha.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div style="display:flex;justify-content:center;padding:20px">
+      {{ form.submit }}
+    </div>
+  </form>
+</div>
+{% endblock %}
