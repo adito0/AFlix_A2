@@ -13,8 +13,7 @@ user_blueprint = Blueprint(
 def user_home():
     watchlist = []
     watched = []
-    user = None
-    print(session['username'])
+    username = None
     try:
         loggedin = session['username']
         user = services.get_user(session['username'], repo.repo_instance)

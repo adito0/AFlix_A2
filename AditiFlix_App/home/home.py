@@ -13,12 +13,21 @@ home_blueprint = Blueprint(
 
 @home_blueprint.route('/home', methods=['GET'])
 def home():
+    try:
+        loggedin = session['username']
+        print(session['username'])
+        loggedin = True
+    except:
+        print("No user")
+        loggedin = False
     movie_list = helper.get_random_movies(3)
     return render_template(
         'home.html',
         login=url_for('authentication_bp.signin'),
         register=url_for('authentication_bp.signup'),
         explore=url_for('home_bp.home2', year=2019, index=0),
+        logout=url_for('authentication_bp.logout'),
+        loggedin=loggedin
     )
 
 @home_blueprint.route('/browse', methods=['GET'])
@@ -91,7 +100,7 @@ def home5():
     print(review_list)
     return render_template(
         'comments.html',
-        movieName=movie.title,
+        movie=movie,
         reviews=review_list
     )
 

@@ -73,9 +73,10 @@ def signin():
             error = 'Username or Password incorrect'
     return render_template('signup.html', form=form, register=False, error=error)
 
-@authentication_blueprint.route('/ri', methods=['GET'])
-def ri():
-    return "HI"
+@authentication_blueprint.route('/logout', methods=['GET'])
+def logout():
+    session.clear()
+    return redirect(url_for('home_bp.home'))
 
 # @authentication_blueprint.route('/register', methods=['GET', 'POST'])
 # def register():
@@ -140,11 +141,11 @@ def ri():
 #         form=form,
 #     )
 #
-
-@authentication_blueprint.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('home_bp.home'))
+#
+# @authentication_blueprint.route('/logout')
+# def logout():
+#     session.clear()
+#     return redirect(url_for('home_bp.home'))
 #
 #
 # def login_required(view):
@@ -154,4 +155,3 @@ def logout():
 #             return redirect(url_for('authentication_bp.login'))
 #         return view(**kwargs)
 #     return wrapped_view
-
