@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for, session
 
 import AditiFlix_App.helpers.helper_functions as helper
 
@@ -15,7 +15,10 @@ home_blueprint = Blueprint(
 def home():
     movie_list = helper.get_random_movies(3)
     return render_template(
-        'home.html'
+        'home.html',
+        login=url_for('authentication_bp.signin'),
+        register=url_for('authentication_bp.signup'),
+        explore=url_for('home_bp.home2', year=2019, index=0),
     )
 
 @home_blueprint.route('/browse', methods=['GET'])
@@ -92,13 +95,37 @@ def home5():
         reviews=review_list
     )
 
-@home_blueprint.route('/write', methods=['GET'])
+@home_blueprint.route('/write', methods=['GET','POST'])
 def home6():
-    return
+    form = CommentForm()
+    error = False
+    title = request.args.get('title')
+    print(title)
+    year = int(request.args.get('year'))
+    try:
+        loggedin = session['username']
+    except:
+        loggedin = False
+    print("L",loggedin)
+    if form.validate_on_submit():
+        try:
+            helper.write_review(title, year,form.review.data, float(form.rating.data))
+            return redirect(url_for('home_bp.home5',title=str(title), year=str(year)))
+        except:
+            error = "Enter valid rating."
+    print("BP:", url_for('home_bp.home6',title=title, year=str(year)))
+    return render_template(
+        'write.html',
+        form=form,
+        error=error,
+        redirect=url_for('home_bp.home6',title=title, year=str(year)),
+        loggedin=loggedin,
+        login=url_for('authentication_bp.signin')
+    )
 
 class CommentForm(FlaskForm):
     review = TextAreaField('Review', [
         DataRequired()])
     rating = FloatField('Rating', [
-        DataRequired()])
+        DataRequired(message="Ensure your rating is a number")])
     submit = SubmitField('Submit')

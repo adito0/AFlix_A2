@@ -7,6 +7,8 @@ from pip._vendor import requests
 
 import AditiFlix_App.adapters.movie_repository as repo
 from AditiFlix_App.domainmodel.movie import Movie
+from AditiFlix_App.domainmodel.review import Review
+
 
 def get_random_movies(number):
     random_ids = random.sample(range(0, repo.repo_instance.get_number_of_movies()-1), number)
@@ -79,3 +81,8 @@ def search_for_movies(search):
 
 def get_reviews(movie:Movie):
     return repo.repo_instance.get_reviews_for_movie(movie)
+
+def write_review(title, year, text, rating):
+    movie_reviewed = repo.repo_instance.get_movie(title, year)
+    review = Review(movie_reviewed, text, rating)
+    repo.repo_instance.add_review(review)

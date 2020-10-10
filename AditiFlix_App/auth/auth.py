@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length, ValidationError
 
 from password_validator import PasswordValidator
 
-from AditiFlix_App.auth.form import SignupForm
+from AditiFlix_App.auth.form import SignupForm, SigninForm
 
 from functools import wraps
 
@@ -50,13 +50,30 @@ def signup():
 
 @authentication_blueprint.route('/signin', methods=('GET', 'POST'))
 def signin():
-    form = SignupForm()
+    form = SigninForm()
+    error = False
     if form.validate_on_submit():
+        try:
+            user = services.get_user(form.username.data, repo.repo_instance)
 
-        return redirect(url_for("authentication_bp.ri"))
-    return render_template('signup.html', form=form, register=False)
+            # Authenticate user.
+            services.authenticate_user(user['username'], form.password.data, repo.repo_instance)
 
-@authentication_blueprint.route('/ri', methods=['GET', 'POST'])
+            # Initialise session and redirect the user to the home page.
+            session.clear()
+            session['username'] = user['username']
+            return redirect(url_for('home_bp.home'))
+
+        except services.UnknownUserException:
+            # Username not known to the system, set a suitable error message.
+            error = 'Username or Password incorrect'
+
+        except services.AuthenticationException:
+            # Authentication failed, set a suitable error message.
+            error = 'Username or Password incorrect'
+    return render_template('signup.html', form=form, register=False, error=error)
+
+@authentication_blueprint.route('/ri', methods=['GET'])
 def ri():
     return "HI"
 
@@ -124,10 +141,10 @@ def ri():
 #     )
 #
 
-# @authentication_blueprint.route('/logout')
-# def logout():
-#     session.clear()
-#     return redirect(url_for('home_bp.home'))
+@authentication_blueprint.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home_bp.home'))
 #
 #
 # def login_required(view):
@@ -138,20 +155,3 @@ def ri():
 #         return view(**kwargs)
 #     return wrapped_view
 
-
-class PasswordValid:
-    def __init__(self, message=None):
-        if not message:
-            message = u'Your password must be at least 8 characters, and contain an upper case letter, \
-            a lower case letter and a digit'
-        self.message = message
-
-    def __call__(self, form, field):
-        schema = PasswordValidator()
-        schema \
-            .min(8) \
-            .has().uppercase() \
-            .has().lowercase() \
-            .has().digits()
-        if not schema.validate(field.data):
-            raise ValidationError(self.message)

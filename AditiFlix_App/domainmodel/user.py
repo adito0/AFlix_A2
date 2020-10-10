@@ -119,6 +119,10 @@ class User:
         return self.__watched_movies
 
     @property
+    def watchlist(self):
+        return self.__watchlist
+
+    @property
     def reviews(self):
         return self.__reviews
 

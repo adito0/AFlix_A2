@@ -5,6 +5,24 @@
         console.log(string)
         window.location=string;
     }
+
+    function viewReview(name, year) {
+        var query_name = name.replace("\n","+")
+        var string = "http://localhost:5000/comments?title="+name+"&year=" + year
+        console.log(string)
+        window.location=string;
+    }
+
+    function review(name, year) {
+        var query_name = name.replace("\n","+")
+        var string = "http://localhost:5000/write?title="+name+"&year=" + year
+        console.log(string)
+        window.location=string;
+    }
+
+    function add(name, year) {
+        ;
+    }
 </script>
 
 {% extends 'layout.html' %}
@@ -16,7 +34,7 @@
                 <h1>{{movie.title}} ({{movie.release_year}})</h1>
                 <p style="color:#5a7791;"><b>Runtime:</b> {{movie.runtime_minutes}} minutes &nbsp;&nbsp;&nbsp;&nbsp;<b>Director:</b> {{movie.director.director_full_name}}</p>
                 <p>{{movie.description}}</p>
-                <div class="row">
+                <div class="row" style="margin-left: -15;">
                     <div class="col">
                         <p>Cast:</p>
                         {% for actor in movie.actors %}
@@ -43,7 +61,14 @@
                 </div>
             </div>
             <div class="col-md-6">
+                <div class="row" style="height: 600px;display:flex;justify-content: center;align-items: flex-end;">
                     <img src={{movie.image}} class="movie-img">
+                </div>
+                <div style="display:flex;justify-content:center;">
+                    <button class="nxt-btn" onclick="review('{{movie.title}}','{{movie.release_year}}')">Review this!</button>
+                    <button class="nxt-btn" onclick="viewReview('{{movie.title}}','{{movie.release_year}}')">See reviews</button>
+                    <button class="nxt-btn" onclick="add('{{movie.title}}','{{movie.release_year}}')">+ Watchlist</button>
+                </div>
             </div>
         </div>
         <div class="row" class="recs">

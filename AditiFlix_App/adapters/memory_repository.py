@@ -37,6 +37,7 @@ class MemoryRepository(AbstractRepository):
         self.__dataset_of_users.append(user)
 
     def get_user(self, username) -> User:
+        print(self.__dataset_of_users)
         for user in self.__dataset_of_users:
             if user.username == username:
                 return user
@@ -148,7 +149,7 @@ def read_csv_file(filename: str):
 
 
 def load_movies(data_path: str, repo: MemoryRepository):
-    for row in read_csv_file(os.path.join(data_path, 'test.csv')):
+    for row in read_csv_file(os.path.join(data_path, 'Data13Movies.csv')):
 
         try:
             movie = Movie(row['Title'], int(row['Year']))

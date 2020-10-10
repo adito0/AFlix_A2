@@ -1,2 +1,29 @@
-<nav id="nav">
+<script type="text/javascript">
+    function user() {
+            ;
+        }
+    function browse() {
+            window.location="http://localhost:5000/browse;
+        }
+</script>
+
+
+<nav id="nav" style="max-width:300px; z-index:2;">
+    <div class="wrapper">
+        <input type="checkbox" id="btn" hidden>
+        <label for="btn" class="menu-btn">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i>
+        </label>
+        <nav id="sidebar" style="z-index:1;">
+            <div class="title">
+                Menu
+            </div>
+            <ul class="list-items">
+                <li><a href="{{url_for('user_bp.user_home')}}">User</a></li>
+                <li><a href="http://localhost:5000/explore?year=2020" onclick="explore()">Explore</a></li>
+                <li><a href="http://localhost:5000/search?query=@@" onclick="search()">Search</a></li>
+            </ul>
+        </nav>
+    </div>
 </nav>

@@ -1,0 +1,55 @@
+<script type="text/javascript">
+    function newMovie(name, year) {
+            var query_name = name.replace("\n","+")
+            var string = "http://localhost:5000/browse?name="+query_name+"&year="+year
+            console.log(string)
+            window.location=string;
+        }
+
+
+</script>
+
+{% extends 'layout.html' %}
+{% block content %}
+<div class="user">
+    {% if loggedin %}
+    <div class="row">
+        <div class="flex-col1" style="margin-left: 200px;color:white;">
+            <div class="flex-row">
+                <h1>USER: {{user}}</h1>
+            </div>
+            <div class="flex-row">
+                <h3>Watchlist</h3>
+            </div>
+            {% for movie in movieList %}
+            <div class="flex-item-movie">
+                <button style="border:none; background: none;"
+                        onclick="newMovie('{{movie.title}}','{{movie.release_year}}')"><img src="{{movie.image}}"
+                                                                                            class="movie-rec">
+                </button>
+                <p class="recs-movie-title">{{movie.title}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row" style="position: relative;top: -180px;">
+        <div class="flex-col1" style="margin-left: 200px;color:white;">
+            <div class="flex-row">
+                <h3>History</h3>
+            </div>
+            {% for movie in watchedList %}
+            <div class="flex-item-movie">
+                <button style="border:none; background: none;"
+                        onclick="newMovie('{{movie.title}}','{{movie.release_year}}')"><img src="{{movie.image}}"
+                                                                                            class="movie-rec">
+                </button>
+                <p class="recs-movie-title">{{movie.title}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h3>Please log in</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

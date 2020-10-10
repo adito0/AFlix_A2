@@ -51,9 +51,6 @@ body
 
 .movie-img
 {
-    position: relative;
-    top: 125px;
-    left: 175px;
     height: 500px;
     padding: 20px;
     transition: 3s ease-out;
@@ -249,6 +246,7 @@ input[type='submit']:hover {
   margin: 0 1rem;
   min-width: 300px;
   flex: 1;
+  padding: 20px;
 }
 
 .body-review{
@@ -285,4 +283,224 @@ input[type='submit']:hover {
 {
   display: flex;
   height: 100vh;
+}
+
+.write
+{
+    display:flex;
+    color:white;
+    justify-content:center;
+    align-items:center;
+    flex-flow:column;
+    margin-top:100px;
+    flex-wrap: wrap;
+}
+
+.home_title
+{
+    FONT-WEIGHT: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    color: white;
+    margin-top: 200px;
+}
+
+.button-flex-row
+{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    padding: 100px;
+}
+.button-flex-col
+{
+    padding: 0px 30px;
+}
+
+.animatebutton {
+  border-radius: 4px;
+  background-color: #008CBA;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 16px;
+  padding: 20px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.animatebutton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.animatebutton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.animatebutton:hover span {
+  padding-right: 25px;
+}
+
+.animatebutton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.wrapper{
+  height: 100%;
+  width: 0px;
+  top: 100;
+  position: relative;
+}
+.wrapper .menu-btn{
+  position: fixed;
+  left: 20px;
+  top: 190px;
+  background: #4a4a4a;
+  color: #fff;
+  height: 45px;
+  width: 45px;
+  z-index: 9999;
+  border: 1px solid #333;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+#btn:checked ~ .menu-btn{
+  left: 180px;
+}
+.wrapper .menu-btn i{
+  position: absolute;
+  transform: ;
+  font-size: 23px;
+  transition: all 0.3s ease;
+}
+.wrapper .menu-btn i.fa-times{
+  opacity: 0;
+}
+#btn:checked ~ .menu-btn i.fa-times{
+  opacity: 1;
+  transform: rotate(-180deg);
+}
+#btn:checked ~ .menu-btn i.fa-bars{
+  opacity: 0;
+  transform: rotate(180deg);
+}
+#sidebar{
+  position: fixed;
+  background: #404040;
+  height: fit-content;
+  width: 200px;
+  overflow: hidden;
+  left: -270px;
+  transition: all 0.3s ease;
+}
+#btn:checked ~ #sidebar{
+  left: 0;
+}
+#sidebar .title{
+  line-height: 65px;
+  text-align: center;
+  background: #317d72;
+  font-size: 18px;
+  font-weight: 300;
+  color: #f2f2f2;
+  border-bottom: 1px solid #222;
+}
+#sidebar .list-items{
+  position: relative;
+  background: #404040;
+  width: 100%;
+  height: fit-content;
+  list-style: none;
+}
+#sidebar .list-items li{
+  padding-left: 40px;
+  line-height: 50px;
+  width:140px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid #333;
+  transition: all 0.3s ease;
+}
+#sidebar .list-items li:hover{
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 0px 10px 3px #222;
+}
+#sidebar .list-items li:first-child{
+  border-top: none;
+}
+#sidebar .list-items li a{
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 300;
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+#sidebar .list-items li a i{
+  margin-right: 20px;
+}
+#sidebar .list-items .icons{
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  position: absolute;
+  bottom: 100px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#sidebar .list-items .icons a{
+  height: 100%;
+  width: 40px;
+  display: block;
+  margin: 0 5px;
+  font-size: 18px;
+  color: #f2f2f2;
+  background: #4a4a4a;
+  border-radius: 5px;
+  border: 1px solid #383838;
+  transition: all 0.3s ease;
+}
+#sidebar .list-items .icons a:hover{
+  background: #404040;
+}
+.list-items .icons a:first-child{
+  margin-left: 0px;
+}
+.content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: #202020;
+  z-index: -1;
+  width: 100%;
+  text-align: center;
+}
+.content .header{
+  font-size: 45px;
+  font-weight: 700;
+}
+.content p{
+  font-size: 40px;
+  font-weight: 700;
 }

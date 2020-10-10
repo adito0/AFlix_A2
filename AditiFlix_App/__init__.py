@@ -34,6 +34,6 @@ def create_app(test_config=None):
         app.register_blueprint(home.home_blueprint)
         from .auth import auth
         app.register_blueprint(auth.authentication_blueprint)
-
-
+        from .users import user
+        app.register_blueprint(user.user_blueprint)
     return app
