@@ -6,6 +6,8 @@ from flask_wtf import FlaskForm
 from wtforms import TextAreaField, HiddenField, SubmitField, FloatField
 from wtforms.validators import DataRequired, Length, ValidationError
 
+import AditiFlix_App.adapters.movie_repository as repo
+
 
 home_blueprint = Blueprint(
     'home_bp', __name__)
@@ -32,12 +34,39 @@ def home():
 
 @home_blueprint.route('/browse', methods=['GET'])
 def home1():
-    movie = helper.get_movie(request.args.get('name'), int(request.args.get('year')))
-    #movie = helper.get_movie("Split",2016)
+    moviename = request.args.get('name')
+    movie = helper.get_movie(moviename, int(request.args.get('year')))
+    watched = False
+    watchlisted = False
+    try:
+        username = session['username']
+        print(request.args.get('watched'), type(request.args.get('watched')))
+        user = helper.get_user(username)
+        if(request.args.get('watched') == "True"):
+            user.watch_movie(movie)
+        if (request.args.get('watchlisted') == "True"):
+            user.watchlist_movie(movie)
+        elif(request.args.get('watchlisted') == "False"):
+            user.remove_movie(movie)
+        if movie in user.watched_movies:
+            watched = True
+        if movie in user.watchlist:
+            watchlisted = True
+        loggedin=True
+    except:
+        loggedin = False
+        print("not logged in")
+    recs = helper.get_random_movies(3)
+    while movie in recs:
+        recs = helper.get_random_movies(3)
+
     return render_template(
         'browse_movie.html',
         movie=movie,
-        recs=helper.get_random_movies(3)
+        recs=recs,
+        loggedin=loggedin,
+        watched=watched,
+        watchlisted=watchlisted
     )
 
 @home_blueprint.route('/explore', methods=['GET'])
@@ -66,10 +95,6 @@ def home2():
         nextEnable=next,
         prevEnable=prev
     )
-
-@home_blueprint.route('/', methods=['GET'])
-def home3():
-    render_template('home.html')
 
 @home_blueprint.route('/search', methods=['GET'])
 def home4():
@@ -118,7 +143,7 @@ def home6():
     print("L",loggedin)
     if form.validate_on_submit():
         try:
-            helper.write_review(title, year,form.review.data, float(form.rating.data))
+            helper.write_review(title, year,form.review.data, float(form.rating.data), loggedin)
             return redirect(url_for('home_bp.home5',title=str(title), year=str(year)))
         except:
             error = "Enter valid rating."

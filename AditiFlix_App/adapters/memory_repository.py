@@ -219,7 +219,8 @@ def load_users(data_path: str, repo: MemoryRepository):
                     i = repo.get_movies().index(movie)
                     movie = repo.get_movies()[i]
                 else:
-                    repo.add_movie(movie)
+                    pass
+                    #repo.add_movie(movie)
                 if movie not in watchlist.list:
                     watchlist.add_movie(movie)
 
@@ -236,7 +237,8 @@ def load_users(data_path: str, repo: MemoryRepository):
                     i = repo.get_movies().index(movie)
                     movie = repo.get_movies()[i]
                 else:
-                    repo.add_movie(movie)
+                    pass
+                    #repo.add_movie(movie)
                 if movie not in watched:
                     watched.add_movie(movie)
                     if movie.runtime_minutes is not None:
@@ -260,7 +262,8 @@ def load_users(data_path: str, repo: MemoryRepository):
                         i = repo.get_movies().index(movie)
                         movie = repo.get_movies()[i]
                     else:
-                        repo.add_movie(movie)
+                        pass
+                        #repo.add_movie(movie)
 
                     review_message = review_string[3].strip()
 

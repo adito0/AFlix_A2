@@ -149,8 +149,18 @@ class User:
     def watch_movie(self, movie):
         if isinstance(movie, Movie):
             self.__watched_movies.add_movie(movie)
+            if movie in self.__watchlist:
+                self.__watchlist.remove_movie(movie)
             if movie.runtime_minutes is not None:
                 self.__time_spent_watching_movies_minutes += movie.runtime_minutes
+
+    def watchlist_movie(self, movie):
+        if isinstance(movie, Movie):
+            self.__watchlist.add_movie(movie)
+
+    def remove_movie(self, movie):
+        if isinstance(movie, Movie):
+            self.__watchlist.remove_movie(movie)
 
     def add_review(self, review):
         if isinstance(review, Review):

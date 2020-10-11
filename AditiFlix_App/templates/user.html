@@ -16,7 +16,8 @@
     <div class="row">
         <div class="flex-col1" style="margin-left: 200px;color:white;">
             <div class="flex-row">
-                <h1>USER: {{user}}</h1>
+                <h1>USER: {{user.username}}</h1>
+                <h3>Minutes watched: {{user.time_spent_watching_movies_minutes}} mins</h3>
             </div>
             <div class="flex-row">
                 <h3>Watchlist</h3>
@@ -47,11 +48,32 @@
             </div>
             {% endfor %}
         </div>
-        {% else %}
+    </div>
+        <div class="row" style="position: relative;top: -360px;">
+        <div class="flex-col1" style="margin-left: 200px;color:white;">
+            <div class="flex-row">
+                <h3>My reviews</h3>
+            </div>
+            {% for review in user.reviews %}
+            <div class="review">
+                    <div class="body-review">
+                        <div class="name-review">{{review.movie.title}}</div>
+                        <div class="place-review">{{review.timestamp}}</div>
+                        <div class="rating">
+                            {{review.rating}}
+                        </div>
+                        <div class="desc-review">
+                            {{review.review_text}}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
         <div style="text-align:center;">
             <h1>Please log in</h1>
         </div>
-        {% endif %}
-    </div>
+    {% endif %}
 </div>
 {% endblock %}

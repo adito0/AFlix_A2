@@ -1,12 +1,14 @@
 <script type="text/javascript">
+
     function changeSlider() {
-        var string = "http://localhost:5000/explore?year="
         var slider = document.getElementById("myRange");
+        var string = "http://localhost:5000/explore?year="
         console.log(slider.value)
         if (document.readyState === 'complete') {
             window.location=string+slider.value.toString();
         }
     }
+
 
     function newMovie(name, year) {
         var query_name = name.replace("\n","+")
@@ -34,7 +36,7 @@
 {% block content %}
 <main id="main">
     <div style="margin-top: 100px;">
-        <h6 style="text-align:center;color:#fff;">Browse movie based on release year</h6>
+        <h6 style="text-align:center;color:#fff;">Browse movie based on release year: <span id="demo"></span></h6>
         <div class="row" style="color:#fff;">
             <div class="col-sm-2" style="text-align:right;">
                 <b>1990</b>

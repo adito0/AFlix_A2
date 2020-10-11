@@ -31,6 +31,6 @@ def user_home():
         loggedin=loggedin,
         movieList=watchlist,
         watchedList=watched,
-        user=username,
+        user=user,
         user_homepage=url_for('user_bp.user_home')
     )
