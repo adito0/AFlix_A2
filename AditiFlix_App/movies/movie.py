@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 import AditiFlix_App.movies.services as services
+import AditiFlix_App.adapters.movie_repository as repo
 
 movie_blueprint = Blueprint(
     'movie_bp', __name__,url_prefix='/movies')
@@ -7,13 +8,13 @@ movie_blueprint = Blueprint(
 @movie_blueprint.route('/browse', methods=['GET'])
 def browse():
     moviename = request.args.get('name')
-    movie = services.get_movie(moviename, int(request.args.get('year')))
+    movie = services.get_movie(moviename, int(request.args.get('year')), repo.repo_instance)
     watched = False
     watchlisted = False
     try:
         username = session['username']
         print(request.args.get('watched'), type(request.args.get('watched')))
-        user = services.get_user(username)
+        user = services.get_user(username, repo.repo_instance)
         if(request.args.get('watched') == "True"):
             user.watch_movie(movie)
         if (request.args.get('watchlisted') == "True"):
@@ -28,9 +29,9 @@ def browse():
     except:
         loggedin = False
         print("not logged in")
-    recs = services.get_random_movies(3)
+    recs = services.get_random_movies(3, repo.repo_instance)
     while movie in recs:
-        recs = services.get_random_movies(3)
+        recs = services.get_random_movies(3, repo.repo_instance)
 
     return render_template(
         'browse_movie.html',
@@ -50,7 +51,7 @@ def explore():
         start_index = 0
     start_index = int(start_index)
     print(year, start_index)
-    movie_list = services.get_ordered_movies_for_year(start_index, 8, year)
+    movie_list = services.get_ordered_movies_for_year(start_index, 8, year, repo.repo_instance)
     if start_index == 0:
         prev = False
     else:
@@ -73,7 +74,7 @@ def explore():
 @movie_blueprint.route('/search', methods=['GET'])
 def search():
     search = request.args.get('query')
-    movie_list = services.search_for_movies(search);
+    movie_list = services.search_for_movies(search, repo.repo_instance);
     if search == "@@":
         value = "ALL"
     else:

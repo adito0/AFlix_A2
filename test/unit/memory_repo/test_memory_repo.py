@@ -36,22 +36,22 @@ def test_add_get_movie(in_memory_repo):
     assert in_memory_repo.get_movie("Lion", 2018) == movie
 
 def test_get_movies_by_title(in_memory_repo):
-    assert in_memory_repo.get_movies_by_title("Lion") == [Movie("Lion", 2019)]
-    movie = Movie("Lion", 2018)
+    assert in_memory_repo.get_movies_by_title("Split") == [Movie("Split", 2016)]
+    movie = Movie("Split", 2017)
     in_memory_repo.add_movie(movie)
-    assert in_memory_repo.get_movies_by_title("Lion") == [Movie("Lion", 2018), Movie("Lion", 2019)]
+    assert in_memory_repo.get_movies_by_title("Split") == [Movie("Split", 2016), Movie("Split", 2017)]
 
 def test_get_number_of_movies(in_memory_repo):
-    assert in_memory_repo.get_number_of_movies() == 6
-    movie = Movie("Lion", 2018)
+    assert in_memory_repo.get_number_of_movies() == 13
+    movie = Movie("Split", 2017)
     in_memory_repo.add_movie(movie)
-    assert in_memory_repo.get_number_of_movies() == 7
-    movie = Movie("Lion", 2018)
+    assert in_memory_repo.get_number_of_movies() == 14
+    movie = Movie("Split", 2017)
     in_memory_repo.add_movie(movie)
-    assert in_memory_repo.get_number_of_movies() == 7
+    assert in_memory_repo.get_number_of_movies() == 14
 
 def test_get_movies_for_genre(in_memory_repo):
-    assert len(in_memory_repo.get_movies_for_genre("Adventure")) == 3
+    assert len(in_memory_repo.get_movies_for_genre("Adventure")) == 7
     assert Movie("Prometheus", 2012) in in_memory_repo.get_movies_for_genre("Adventure")
     assert Movie("Guardians of the Galaxy", 2014) in in_memory_repo.get_movies_for_genre("Adventure")
     assert Movie("Suicide Squad", 2016) in in_memory_repo.get_movies_for_genre("Adventure")
@@ -61,17 +61,15 @@ def test_get_movies_for_director(in_memory_repo):
     movie = Movie("Lion", 2018)
     movie.director = Director("Taika Waititi")
     in_memory_repo.add_movie(movie)
-    assert Movie("Sing", 2016) in in_memory_repo.get_movies_for_director("Taika Waititi")
     assert Movie("Lion", 2018) in in_memory_repo.get_movies_for_director("Taika Waititi")
-    assert len(in_memory_repo.get_movies_for_director("Taika Waititi")) == 2
+    assert len(in_memory_repo.get_movies_for_director("Taika Waititi")) == 1
     assert in_memory_repo.get_movies_for_director("Katy Perry") == []
 
 def test_get_movies_for_actors(in_memory_repo):
-    movie = Movie("Lion", 2018)
+    movie = Movie("Split", 2016)
     in_memory_repo.add_movie(movie)
     assert Movie("Suicide Squad", 2016) in in_memory_repo.get_movies_for_actor("Will Smith")
-    assert Movie("Split", 2016) in in_memory_repo.get_movies_for_actor("Will Smith")
-    assert len(in_memory_repo.get_movies_for_actor("Will Smith")) == 2
+    assert len(in_memory_repo.get_movies_for_actor("Will Smith")) == 1
     assert in_memory_repo.get_movies_for_actor("Katy Perry") == []
 
 def test_add_genre(in_memory_repo):

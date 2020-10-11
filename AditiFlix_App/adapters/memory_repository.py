@@ -147,7 +147,7 @@ def read_csv_file(filename: str):
 
 
 def load_movies(data_path: str, repo: MemoryRepository):
-    for row in read_csv_file(os.path.join(data_path, 'Data13Movies.csv')):
+    for row in read_csv_file(os.path.join(data_path, 'Data1000Movies.csv')):
 
         try:
             movie = Movie(row['Title'], int(row['Year']))
@@ -297,6 +297,7 @@ def populate(data_path: str, repo: MemoryRepository):
 
 def get_image(movie: Movie=Movie("Split",2016)):
     token = "adea3d0d"
+    token = "40e73228"
     movie_name = movie.title.replace(" ","+")
     movie_year = movie.release_year
     url = "http://www.omdbapi.com/?apikey="+token+"&t="+movie_name.lower()+"&y="+str(movie_year)

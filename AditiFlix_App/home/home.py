@@ -18,7 +18,7 @@ def home():
     except:
         print("No user")
         loggedin = False
-    movie_list = helper.get_random_movies(3)
+    movie_list = helper.get_random_movies(3, repo.repo_instance)
     return render_template(
         'home.html',
         login=url_for('authentication_bp.signin'),

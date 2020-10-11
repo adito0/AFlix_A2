@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 import AditiFlix_App.reviews.services as services
+import AditiFlix_App.adapters.movie_repository as repo
+
 
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField, HiddenField, SubmitField, FloatField
@@ -13,8 +15,8 @@ review_blueprint = Blueprint(
 def read():
     title = request.args.get('title')
     year = int(request.args.get('year'))
-    movie = services.get_movie(title, year)
-    review_list = services.get_reviews(movie)
+    movie = services.get_movie(title, year, repo.repo_instance)
+    review_list = services.get_reviews(movie, repo.repo_instance)
     print(review_list)
     return render_template(
         'read.html',
@@ -36,7 +38,7 @@ def write():
     print("L",loggedin)
     if form.validate_on_submit():
         try:
-            services.write_review(title, year,form.review.data, float(form.rating.data), loggedin)
+            services.write_review(title, year,form.review.data, float(form.rating.data), loggedin, repo.repo_instance)
             return redirect(url_for('review_bp.read',title=str(title), year=str(year)))
         except:
             error = "Enter valid rating."
