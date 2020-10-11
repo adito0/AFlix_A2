@@ -1,34 +1,39 @@
 <script type="text/javascript">
 
-    function changeSlider() {
+    function changeSlider(string) {
+        var host = window.location.origin;
+        var url = new URL(host+string);
         var slider = document.getElementById("myRange");
-        var string = "http://localhost:5000/explore?year="
-        console.log(slider.value)
-        if (document.readyState === 'complete') {
-            window.location=string+slider.value.toString();
-        }
+        url.searchParams.append("year", slider.value.toString());
+        window.location=url.toString();
     }
 
 
-    function newMovie(name, year) {
+    function newMovie(name, year, string) {
+        var host = window.location.origin;
+        var url = new URL(host+string);
         var query_name = name.replace("\n","+")
-        var string = "http://localhost:5000/browse?name="+query_name+"&year="+year
-        console.log(string)
-        window.location=string;
+        url.searchParams.append("name", query_name);
+        url.searchParams.append("year", year);
+        window.location=url.toString();
     }
 
-    function nextPage(year, index) {
+    function nextPage(year, index, string) {
+        var host = window.location.origin;
+        var url = new URL(host+string);
+        url.searchParams.append("year", year);
         var index = parseInt(index, 10) + 8
-        var string = "http://localhost:5000/explore?year="+year+"&index="+index.toString()
-        console.log(string)
-        window.location=string;
+        url.searchParams.append("index", index);
+        window.location=url.toString();
     }
 
-    function prevPage(year, index) {
+    function prevPage(year, index, string) {
+        var host = window.location.origin;
+        var url = new URL(host+string);
+        url.searchParams.append("year", year);
         var index = parseInt(index, 10) - 8
-        var string = "http://localhost:5000/explore?year="+year+"&index="+index.toString()
-        console.log(string)
-        window.location=string;
+        url.searchParams.append("index", index);
+        window.location=url.toString();
     }
 </script>
 
@@ -43,7 +48,7 @@
             </div>
             <div class="col-sm-8" style="display: flex; flex-direction: row">
                 <div class="slidecontainer">
-                    <input type="range" min="1990" max="2020" value={{year}} class="slider" id="myRange" onchange="changeSlider()">
+                    <input type="range" min="1990" max="2020" value={{year}} class="slider" id="myRange" onchange="changeSlider('{{ url_for('movie_bp.explore') }}')">
                 </div>
             </div>
             <div class="col-sm-2">
@@ -54,17 +59,17 @@
         <div class="flex-grid" style="margin-left:300px;margin-right:100px">
             {% for movie in movieList %}
                 <div class="flex-item-movie">
-                    <button style="border:none; background: none;" onclick="newMovie('{{movie.title}}','{{movie.release_year}}')"><img src="{{movie.image}}" class="movie-rec"></button>
+                    <button style="border:none; background: none;" onclick="newMovie('{{movie.title}}','{{movie.release_year}}', '{{ url_for('movie_bp.browse') }}')"><img src="{{movie.image}}" class="movie-rec"></button>
                     <p class="recs-movie-title">{{movie.title}}</p>
                 </div>
             {% endfor %}
         </div>
         <div style="display:flex;justify-content: center;">
             {% if nextEnable %}
-                <button class="nxt-btn" onclick="nextPage('{{year}}','{{index}}')">Next</button>
+                <button class="nxt-btn" onclick="nextPage('{{year}}','{{index}}', '{{ url_for('movie_bp.explore') }}')">Next</button>
             {% endif %}
             {% if prevEnable %}
-                <button class="nxt-btn" onclick="prevPage('{{year}}','{{index}}')">Prev</button>
+                <button class="nxt-btn" onclick="prevPage('{{year}}','{{index}}', '{{ url_for('movie_bp.explore') }}')">Prev</button>
             {% endif %}
         </div>
     </div>

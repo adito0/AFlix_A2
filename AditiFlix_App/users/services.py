@@ -3,6 +3,7 @@ from AditiFlix_App.auth.services import UnknownUserException
 
 
 
+
 def get_user(username: str, repo: AbstractRepository):
     user = repo.get_user(username)
     if user is None:
