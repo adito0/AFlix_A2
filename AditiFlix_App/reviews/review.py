@@ -51,7 +51,7 @@ def write():
 
 class ReviewForm(FlaskForm):
     review = TextAreaField('Review', [
-        DataRequired()])
+        DataRequired(message="Too short!")])
     rating = FloatField('Rating', [
         DataRequired(message="Ensure your rating is a number")])
     submit = SubmitField('Submit')

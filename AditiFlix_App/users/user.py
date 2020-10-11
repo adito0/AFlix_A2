@@ -18,14 +18,11 @@ def user_home():
         loggedin = session['username']
         user = services.get_user(session['username'], repo.repo_instance)
         loggedin = True
-        print(user.watchlist)
         watchlist = user.watchlist
         watched = user.watched_movies
         username = user.username
     except:
         loggedin = False
-
-    print(loggedin)
     return render_template(
         'user.html',
         loggedin=loggedin,
