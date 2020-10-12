@@ -52,15 +52,15 @@ def explore():
     start_index = int(start_index)
     print(year, start_index)
     movie_list = services.get_ordered_movies_for_year(start_index, 8, year, repo.repo_instance)
+    full_length = services.get_number_movies_for_year(year, repo.repo_instance)
     if start_index == 0:
         prev = False
     else:
         prev = True
-    if start_index + 8 > len(movie_list):
+    if start_index + 8 > full_length:
         next = False
     else:
         next = True
-
     return render_template(
         'explore.html',
         movieList=movie_list,

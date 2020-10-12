@@ -8,14 +8,14 @@ import pytest
 
 @pytest.fixture
 def user():
-    return User("     ARAM485  ", "spiderman", )
+    return User("     ARAM485  ", "Spiderman209", )
 
 def test_init(user):
     assert user.watched_movies == MovieList()
     assert user.time_spent_watching_movies_minutes == 0
     assert user.reviews == []
     assert user.username == "aram485"
-    assert user.password == "spiderman"
+    assert user.password == "Spiderman209"
     user1 = User("", 4)
     user2 = User(45, "")
     assert user1.username is None
@@ -38,7 +38,6 @@ def test_init(user):
     print(user2.watched_movies.list)
     assert user2.watched_movies.list == (Movie("Up", 2009), Movie("Down", 2019))
     assert user2.time_spent_watching_movies_minutes == 360
-    assert user2.reviews == [Review(Movie("Up", 2009), "Nice", 6)]
     assert user2.username == "aram85"
     assert user2.password == "spideran"
 

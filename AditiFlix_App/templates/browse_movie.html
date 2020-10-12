@@ -75,7 +75,7 @@
                     <div class="row">
                         {% for movie in recs %}
                             <div style="margin-left: 8px" class="col-sml-2">
-                                <button style="border:none; background: none;" onclick="newMovie('{{movie.title}}','{{movie.release_year}}', '{{ url_for('movie_bp.browse') }}')"><img src="{{movie.image}}" class="movie-rec"></button>
+                                <button style="border:none; background: none;" onclick='newMovie("{{movie.title}}","{{movie.release_year}}", "{{ url_for("movie_bp.browse") }}")'><img src="{{movie.image}}" class="movie-rec"></button>
                                 <p class="recs-movie-title">{{movie.title}}</p>
                             </div>
                         {% endfor %}
@@ -87,16 +87,16 @@
                     <img src={{movie.image}} class="movie-img">
                 </div>
                 <div style="display:flex;justify-content:center;">
-                    <button class="nxt-btn" onclick="viewReview('{{movie.title}}','{{movie.release_year}}', '{{ url_for('review_bp.read') }}')">Reviews</button>
+                    <button class="nxt-btn" onclick='viewReview("{{movie.title}}","{{movie.release_year}}", "{{ url_for("review_bp.read") }}")'>Reviews</button>
                     {% if watched %}
-                        <button class="nxt-btn" onclick="watch('{{movie.title}}','{{movie.release_year}}', '{{ url_for('movie_bp.browse') }}')">Watch again</button>
+                        <button class="nxt-btn" onclick='watch("{{movie.title}}","{{movie.release_year}}", "{{ url_for("movie_bp.browse") }}")'>Watch again</button>
                     {% else %}
-                        <button class="nxt-btn" onclick="watch('{{movie.title}}','{{movie.release_year}}', '{{ url_for('movie_bp.browse') }}')">Watch</button>
+                        <button class="nxt-btn" onclick='watch("{{movie.title}}","{{movie.release_year}}", "{{ url_for("movie_bp.browse") }}")'>Watch</button>
                     {% endif %}
                     {% if watchlisted %}
-                        <button class="nxt-btn" onclick="rem('{{movie.title}}','{{movie.release_year}}','{{ url_for('movie_bp.browse') }}')">- Watchlist</button>
+                        <button class="nxt-btn" onclick='rem("{{movie.title}}","{{movie.release_year}}","{{ url_for("movie_bp.browse") }}")'>- Watchlist</button>
                     {% else %}
-                        <button class="nxt-btn" onclick="add('{{movie.title}}','{{movie.release_year}}','{{ url_for('movie_bp.browse') }}')">+ Watchlist</button>
+                        <button class="nxt-btn" onclick='add("{{movie.title}}","{{movie.release_year}}","{{ url_for("movie_bp.browse") }}")'>+ Watchlist</button>
                     {% endif %}
                 </div>
             </div>

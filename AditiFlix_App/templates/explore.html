@@ -15,6 +15,7 @@
         var query_name = name.replace("\n","+")
         url.searchParams.append("name", query_name);
         url.searchParams.append("year", year);
+        console.log(url.toString());
         window.location=url.toString();
     }
 
@@ -59,17 +60,17 @@
         <div class="flex-grid" style="margin-left:300px;margin-right:100px">
             {% for movie in movieList %}
                 <div class="flex-item-movie">
-                    <button style="border:none; background: none;" onclick="newMovie('{{movie.title}}','{{movie.release_year}}', '{{ url_for('movie_bp.browse') }}')"><img src="{{movie.image}}" class="movie-rec"></button>
+                    <button style="border:none; background: none;" onclick='newMovie("{{movie.title}}","{{movie.release_year}}", "{{ url_for("movie_bp.browse") }}")'><img src="{{movie.image}}" class="movie-rec"></button>
                     <p class="recs-movie-title">{{movie.title}}</p>
                 </div>
             {% endfor %}
         </div>
         <div style="display:flex;justify-content: center;">
-            {% if nextEnable %}
-                <button class="nxt-btn" onclick="nextPage('{{year}}','{{index}}', '{{ url_for('movie_bp.explore') }}')">Next</button>
-            {% endif %}
             {% if prevEnable %}
                 <button class="nxt-btn" onclick="prevPage('{{year}}','{{index}}', '{{ url_for('movie_bp.explore') }}')">Prev</button>
+            {% endif %}
+            {% if nextEnable %}
+                <button class="nxt-btn" onclick="nextPage('{{year}}','{{index}}', '{{ url_for('movie_bp.explore') }}')">Next</button>
             {% endif %}
         </div>
     </div>

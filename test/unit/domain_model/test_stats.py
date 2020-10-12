@@ -257,9 +257,9 @@ def test_top_genres(stats):
                                     Genre("Drama")]
 
 
-def test_recs(stats):
-    filename = '../../data/test.csv'
-    movie_file_reader = MovieFileCSVReader(filename)
-    movie_file_reader.read_csv_file()
-    assert stats.make_recommendations(movie_file_reader.dataset_of_movies, -1) == [
-        Movie("Guardians of the Galaxy", 2014), Movie("Split", 2016), Movie("Sing", 2016), Movie("Suicide Squad", 2016)]
+# def test_recs(stats):
+#     filename = '../../data/test.csv'
+#     movie_file_reader = MovieFileCSVReader(filename)
+#     movie_file_reader.read_csv_file()
+#     assert stats.make_recommendations(movie_file_reader.dataset_of_movies, -1) == [
+#         Movie("Guardians of the Galaxy", 2014), Movie("Split", 2016), Movie("Sing", 2016), Movie("Suicide Squad", 2016)]

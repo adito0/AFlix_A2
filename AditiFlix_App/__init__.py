@@ -22,10 +22,12 @@ def create_app(test_config=None):
         # Load test configuration, and override any configuration settings.
         app.config.from_mapping(test_config)
         data_path = app.config['TEST_DATA_PATH']
-
-    # Create the MemoryRepository implementation for a memory-based repository.
-    repo.repo_instance = MemoryRepository()
-    populate(data_path, repo.repo_instance)
+        repo.repo_instance = MemoryRepository()
+        populate(data_path, repo.repo_instance, 'Data13Movies.csv')
+    else:
+        # Create the MemoryRepository implementation for a memory-based repository.
+        repo.repo_instance = MemoryRepository()
+        populate(data_path, repo.repo_instance, 'Data1000Movies.csv')
 
     # Build the application - these steps require an application context.
     with app.app_context():

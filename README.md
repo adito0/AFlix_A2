@@ -4,6 +4,9 @@
 
 A Web application imitating Netflix that demonstrates use of Python's Flask framework. The application makes use of libraries such as the Jinja templating library and WTForms. Architectural design patterns and principles including Repository, Dependency Inversion and Single Responsibility have been used to design the application. The application uses Flask Blueprints to maintain a separation of concerns between application functions. Testing includes unit and end-to-end testing using the pytest tool. 
 
+NOTE 1: The application will take up to 10 mins to start up at first due to the 1000 API calls being made to OMDB. After that everything should be smooth.
+
+NOTE 2: A few bug fixes were committed after the due date but Martin has approved them and said they will not incur the 10% penalty. See email in the root folder :)
 ## Installation
 
 **Installation via requirements.txt**
@@ -27,6 +30,7 @@ From the *AFlix_A2* directory, and within the activated virtual environment (see
 $ flask run
 ```` 
 
+The webapp can be accessed by going to http://localhost:5000/home
 
 ## Configuration
 

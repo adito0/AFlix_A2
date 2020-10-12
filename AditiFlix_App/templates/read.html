@@ -17,7 +17,7 @@
 
         <h2 class="title">Reviews for {{movie.title}}</h2>
         <div style="display:flex;justify-content:center;">
-                    <button class="nxt-btn" onclick="review('{{movie.title}}','{{movie.release_year}}','{{ url_for('review_bp.write') }}')">Review this!</button>
+                    <button class="nxt-btn" onclick='review("{{movie.title}}","{{movie.release_year}}","{{ url_for("review_bp.write") }}")'>Review this!</button>
         </div>
         <div class="reviews">
             {% for review in reviews %}

@@ -22,6 +22,9 @@ def get_ordered_movies_for_year(start_index,number, year, repo: AbstractReposito
     list_of_movies = []
     return repo.get_movies_for_year(year)[start_index:start_index+number]
 
+def get_number_movies_for_year(year, repo: AbstractRepository):
+    return len(repo.get_movies_for_year(year))
+
 def search_for_movies(search, repo: AbstractRepository):
     # First parameter is genre then actor then director e.g Family&Will+Smith&Taika+Waititi
     list_params = search.split("@")

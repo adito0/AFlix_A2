@@ -15,7 +15,7 @@ TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'aditi', 'Documents', 'COMP
 @pytest.fixture
 def in_memory_repo():
     repo = MemoryRepository()
-    memory_repository.populate(TEST_DATA_PATH, repo)
+    memory_repository.populate(TEST_DATA_PATH, repo, 'Data13Movies.csv')
     return repo
 
 

@@ -21,7 +21,6 @@ from AditiFlix_App.domainmodel.stats import Stats
 from AditiFlix_App.domainmodel.watching_simulation import WatchingSimulation
 from AditiFlix_App.domainmodel.movielist import MovieList
 
-
 class MemoryRepository(AbstractRepository):
     # Articles ordered by date, not id. id is assumed unique.
 
@@ -146,9 +145,9 @@ def read_csv_file(filename: str):
             yield row
 
 
-def load_movies(data_path: str, repo: MemoryRepository):
-    for row in read_csv_file(os.path.join(data_path, 'Data1000Movies.csv')):
-
+def load_movies(data_path: str, repo: MemoryRepository, data_file):
+    print("DATA: ", data_file)
+    for row in read_csv_file(os.path.join(data_path, data_file)):
         try:
             movie = Movie(row['Title'], int(row['Year']))
         except ValueError:
@@ -288,9 +287,9 @@ def load_users(data_path: str, repo: MemoryRepository):
         repo.add_user(user)
 
 
-def populate(data_path: str, repo: MemoryRepository):
+def populate(data_path: str, repo: MemoryRepository, data_file):
     # Load articles and tags into the repository.
-    load_movies(data_path, repo)
+    load_movies(data_path, repo, data_file)
 
     # Load users into the repository.
     load_users(data_path, repo)
@@ -310,7 +309,7 @@ def test_populate():
     TEST_DATA_PATH = os.path.join('C:', os.sep, 'Users', 'aditi', 'Documents', 'COMPSCI235', 'AFlix_A2', 'AFLix_A2',
                                   'test', 'data')
     repo = MemoryRepository()
-    populate(TEST_DATA_PATH, repo)
+    populate(TEST_DATA_PATH, repo, 'Data13Movies.csv')
     repo.get_movies()
     assert repr(repo.get_actors()) == "[<Actor Anya Taylor-Joy>, <Actor Bradley Cooper>, <Actor Charlize Theron>, <Actor Chris Pratt>, <Actor Haley Lu Richardson>, <Actor Jared Leto>, <Actor Jessica Sula>, <Actor Logan Marshall-Green>, <Actor Margot Robbie>, <Actor Matthew McConaughey>, <Actor Michael Fassbender>, <Actor Noomi Rapace>, <Actor Reese Witherspoon>, <Actor Scarlett Johansson>, <Actor Seth MacFarlane>, <Actor Vin Diesel>, <Actor Viola Davis>, <Actor Will Smith>, <Actor Zoe Saldana>]"
     assert repr(repo.get_directors()) == "[<Director David Ayer>, <Director James Gunn>, <Director M. Night Shyamalan>, <Director Ridley Scott>, <Director Taika Waititi>]"

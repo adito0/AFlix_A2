@@ -61,7 +61,7 @@
                 {% for movie in movieList %}
                 <div class="flex-item-movie">
                     <button style="border:none; background: none;"
-                            onclick="newMovie('{{movie.title}}','{{movie.release_year}}','{{ url_for('movie_bp.browse') }}')"><img src="{{movie.image}}"
+                            onclick='newMovie("{{movie.title}}","{{movie.release_year}}","{{ url_for("movie_bp.browse") }}")'><img src="{{movie.image}}"
                                                                                                 class="movie-rec">
                     </button>
                     <p class="recs-movie-title">{{movie.title}}</p>
